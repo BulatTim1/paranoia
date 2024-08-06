@@ -49,7 +49,7 @@ class User(Base):
 
 class GameConfig(Base):
     __tablename__ = 'game_config'
-    start_round = sa.Column(sa.Time, default=datetime.time(9, 0, tzinfo=datetime.timezone.utcoffset(3)))
+    start_round = sa.Column(sa.Time, default=datetime.time(6, 0))
     round_duration = sa.Column(sa.Interval, default=datetime.timedelta(hours=15))
     survey_threshold = sa.Column(sa.Integer, default=10, min=0, max=100)
 
@@ -59,7 +59,7 @@ class Round(Base):
     issued_at = sa.Column(sa.Date, default=sa.func.now())
     winner = sa.Column(sa.Enum('rus', 'liz'), nullable=True, default=None)
     identified_threshold = sa.Column(sa.Integer, default=10, min=0, max=100)
-    start_round = sa.Column(sa.Time, default=datetime.time(9, 0, tzinfo=datetime.timezone.utcoffset(3)))
+    start_round = sa.Column(sa.Time, default=datetime.time(6, 0)) # utc
     round_duration = sa.Column(sa.Interval, default=datetime.timedelta(hours=15))
 
 class Task(Base):
