@@ -10,6 +10,7 @@ import {Layout} from "./layouts/layout.tsx";
 import '@telegram-apps/telegram-ui/dist/styles.css';
 import {Home} from "./pages/home.tsx";
 import {Players} from "./pages/playertypes.tsx"
+import {Rules} from "./components/Rules";
 
 
 const router = createBrowserRouter([
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         path: "PlayerTypes",
         element: <Players />,
     },
+    {
+        path: "rules",
+        element: <Rules />,
+    }
 ]);
 
 createRoot(document.getElementById("root")).render(
