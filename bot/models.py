@@ -38,6 +38,10 @@ class User(Base):
         with Session() as session:
             return session.query(User).filter_by(guid_token=guid_token).first()
 
+    def get_user_by_tg_id(self, telegram_id):
+        with Session() as session:
+            return session.query(User).filter_by(telegram_id=telegram_id).first()
+
 
 # Create or update the tables
 Base.metadata.create_all(bind=engine, checkfirst=True)

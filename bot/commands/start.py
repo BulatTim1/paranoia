@@ -13,7 +13,7 @@ from globals import bot, dp, User
 
 
 def user_auth(user_id):
-    user = User.query.filter_by(telegram_id=user_id).first()
+    user = User.get_user_by_tg_id(user_id)
     return True if user else False
 
 
