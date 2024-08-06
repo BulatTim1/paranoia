@@ -32,13 +32,11 @@ class User(Base):
                 res = True
             except:
                 session.rollback()
-            finally:
-                session.close()
         return res
 
     def get_user_by_guid(self, guid_token):
         with Session() as session:
-            return User.query.filter_by(guid_token=guid_token).first()
+            return session.query(User).filter_by(guid_token=guid_token).first()
 
 
 # Create or update the tables
