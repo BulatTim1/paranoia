@@ -21,7 +21,7 @@ def user_auth(user_id):
 async def send_welcome(message: types.Message, state: FSMContext):
     await state.finish()
     if user_auth(message.from_user.id):
-        ikb = InlineKeyboardButton("Перейти", web_app=WebAppInfo(url='https://google.com'))
+        ikb = InlineKeyboardButton("Перейти", web_app=WebAppInfo(url='https://webhook.site/415573de-aeaf-4ae6-99d4-c09f53081aed'))
 
         keyboard = InlineKeyboardMarkup()
         keyboard.add(ikb)
