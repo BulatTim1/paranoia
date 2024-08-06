@@ -48,3 +48,24 @@ class User(Base):
 
 # Create or update the tables
 Base.metadata.create_all(bind=engine, checkfirst=True)
+
+
+class Round(Base): ...
+
+
+class Task(Base): ...
+
+
+class Rus(Base): ...
+
+
+class Lizard(Base): ...
+
+
+class AssignedTask(Base): ...
+
+
+class LizardVote(Base): ...
+
+
+class VerifyVote(Base): ...
