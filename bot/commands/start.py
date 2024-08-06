@@ -8,8 +8,8 @@ from aiogram.utils import executor
 from aiogram.utils.markdown import hbold
 from aiogram import types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
-from bot.states.login import Guid
-from bot.globals import bot, dp
+states.login import Guid
+globals import bot, dp
 
 
 def user_auth(user_id):

@@ -1,5 +1,5 @@
 from aiogram import executor as ex
-from bot.commands import start
+from commands import start
 from globals import dp
 
 

@@ -7,7 +7,7 @@ from aiogram.types import CallbackQuery, Message
 from aiogram.utils import executor
 from aiogram.utils.markdown import hbold
 from aiogram import types
-from bot.globals import bot, dp, User
+from globals import bot, dp, User
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 
 
