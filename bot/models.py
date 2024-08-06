@@ -38,12 +38,12 @@ class User(Base):
     @staticmethod
     def get_user_by_guid(guid_token):
         with Session() as session:
-            return session.query(UserOrm).filter_by(guid_token=guid_token).first()
+            return session.query(User).filter_by(guid_token=guid_token).first()
         
     @staticmethod
     def get_user_by_tg_id(telegram_id):
         with Session() as session:
-            return session.query(UserOrm).filter_by(telegram_id=telegram_id).first()
+            return session.query(User).filter_by(telegram_id=telegram_id).first()
         
     @staticmethod
     def get_user_by_id(user_id):
