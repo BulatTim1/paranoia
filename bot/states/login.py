@@ -10,9 +10,9 @@ from aiogram import types
 from bot.globals import bot, dp, User
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 
+
 class Guid(StatesGroup):
     guid = State()
-
 
 
 @dp.message_handler(state=Guid.guid)
@@ -27,4 +27,3 @@ async def add_category(message: types.Message, state: FSMContext):
             await message.reply("Неверный токен")
 
     await state.finish()
-
