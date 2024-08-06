@@ -13,7 +13,7 @@ Session = sessionmaker(bind=engine)
 Base = declarative_base()
 
 # Define your models
-class UserOrm(Base):
+class User(Base):
     __tablename__ = 'user'
     id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     telegram_id = sa.Column(sa.BigInteger, nullable=True, default=None)
