@@ -17,8 +17,9 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'user'
     id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
-    telegram_id = sa.Column(sa.BigInteger)
-    guid_token = sa.Column(sa.String, nullable=True, default=None)
+    telegram_id = sa.Column(sa.BigInteger, nullable=True, default=None)
+    guid_token = sa.Column(sa.String)
+    fullname = sa.Column(sa.String)
     joined_at = sa.Column(sa.DateTime, default=sa.func.now())
     is_banned = sa.Column(sa.Boolean, default=False)
 
