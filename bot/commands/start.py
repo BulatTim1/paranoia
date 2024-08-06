@@ -9,7 +9,7 @@ from aiogram.utils.markdown import hbold
 from aiogram import types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from states.login import Guid
-from globals import bot, dp
+from globals import bot, dp, User
 
 
 def user_auth(user_id):
