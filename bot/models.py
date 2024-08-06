@@ -17,8 +17,9 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'user'
     id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
-    telegram_id = sa.Column(sa.BigInteger)
-    guid_token = sa.Column(sa.String, nullable=True, default=None)
+    telegram_id = sa.Column(sa.BigInteger, nullable=True, default=None)
+    guid_token = sa.Column(sa.String, nullable=True)
+    fullname = sa.Column(sa.String)
     joined_at = sa.Column(sa.DateTime, default=sa.func.now())
     is_banned = sa.Column(sa.Boolean, default=False)
 
@@ -43,7 +44,3 @@ class User(Base):
     def get_user_by_tg_id(telegram_id):
         with Session() as session:
             return session.query(User).filter_by(telegram_id=telegram_id).first()
-
-
-# Create or update the tables
-Base.metadata.create_all(bind=engine, checkfirst=True)

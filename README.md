@@ -3,8 +3,7 @@ Paranoia game for LetoCTF Hackathon
 
 # services
  - bot - telegram bot for push notifications
- - web - telegram web app for players
- - admin - telegram web app for admins
+ - web - telegram web app for players and admins
  - db - postgres
 
 # how to start
@@ -18,8 +17,9 @@ Paranoia game for LetoCTF Hackathon
    - push notifications to bot for notifications (round start, round stop, GGWP)
    - checkout leaderboard
    - survey in the end of round
-2. admin
-   - create tasks
-   - TBD
-3. bot
+   - admin panel
+     - create tasks
+     - TBD
+2. bot
+   - authorize by token
    - waiting for notifications and push them to specific group (probably)
