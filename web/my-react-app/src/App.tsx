@@ -1,6 +1,7 @@
 import '@telegram-apps/telegram-ui/dist/styles.css';
 
 import {AppRoot, Placeholder} from '@telegram-apps/telegram-ui';
+import '@telegram-apps/telegram-ui/dist/styles.css';
 import {Layout} from "./Layouts/layout.tsx";
 import {MainMenu} from "./components/ToDoList";
 import React from "react";

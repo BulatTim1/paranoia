@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
 
+
+
 .Items {
     display: flex;
     width: 100%;
@@ -12,9 +14,23 @@
     /*border-bottom: solid black 1px;*/
 }
 
+
 .upper {
     font-size: 1.5rem;
-    color: black;
+    /*color: black;*/
+
+}
+
+.section {
+    background-color: white;
+}
+
+.line {
+    background-color: white;
+}
+
+.arrow{
+    float: right;
 }
 
 .description {
