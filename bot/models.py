@@ -34,11 +34,13 @@ class User(Base):
                 session.rollback()
         return res
 
-    def get_user_by_guid(self, guid_token):
+    @staticmethod
+    def get_user_by_guid(guid_token):
         with Session() as session:
             return session.query(User).filter_by(guid_token=guid_token).first()
 
-    def get_user_by_tg_id(self, telegram_id):
+    @staticmethod
+    def get_user_by_tg_id(telegram_id):
         with Session() as session:
             return session.query(User).filter_by(telegram_id=telegram_id).first()
 
