@@ -9,7 +9,7 @@ import {AppRoot} from "@telegram-apps/telegram-ui";
 import {Layout} from "./layouts/layout.tsx";
 import '@telegram-apps/telegram-ui/dist/styles.css';
 import {Home} from "./pages/home.tsx";
-import {About} from "./pages/About.tsx";
+import {Players} from "./pages/playertypes.tsx"
 
 
 const router = createBrowserRouter([
@@ -18,8 +18,8 @@ const router = createBrowserRouter([
         element: <Home />
     },
     {
-        path: "about",
-        element: <About />,
+        path: "PlayerTypes",
+        element: <Players />,
     },
 ]);
 

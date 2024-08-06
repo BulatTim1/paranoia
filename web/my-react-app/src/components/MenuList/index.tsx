@@ -6,14 +6,21 @@ import {useNavigate} from "react-router-dom";
 import {instruction, game_menu} from "../../menu_routes.ts";
 
 
+
 export const MainMenu = () => {
+
+    const navigate = useNavigate()
+
+    const handleClick = (path: string) => {
+        navigate(path);
+    }
 
     return (
         <List>
             <header><i>Правила игры</i></header>
             <Section>
                 {instruction.map((el) => (
-                    <Cell
+                    <Cell onClick={() => handleClick(el.path)}
                         before={<Avatar size={48}/>}
                         after={<Navigation className="arrow"/>}
                         subtitle={el.description}
@@ -25,7 +32,7 @@ export const MainMenu = () => {
             <header><i>Игра</i></header>
             <Section>
                 {game_menu.map((el) => (
-                    <Cell
+                    <Cell  onClick={() => handleClick(el.path)}
                         before={<Avatar size={48}/>}
                         after={<Navigation className="arrow"/>}
                         subtitle={el.description}
