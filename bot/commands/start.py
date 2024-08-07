@@ -1,5 +1,5 @@
 import logging
-from aiogram.dispatcher import FSMContext
+from aiogram.fsm.context import FSMContext
 from aiogram import types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from states.login import Guid
