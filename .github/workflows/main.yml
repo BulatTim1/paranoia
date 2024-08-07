@@ -12,7 +12,7 @@ on:
 
 jobs:
   docker:
-    name: Build and run compose
+    name: init
     runs-on: self-hosted
     steps:
       - name: "☁️ checkout repository"
@@ -30,9 +30,40 @@ jobs:
           envkey_TOKEN_EXPIRE_IN_SECONDS: ${{ secrets.TOKEN_EXPIRE_IN_SECONDS }}
           file_name: .env
           fail_on_empty: true
-      
+  db:
+    name: build and run db
+    runs-on: self-hosted
+    needs: docker
+    steps:
       - name: "📦 build app"
-        run: "docker compose build"
+        run: "docker compose up -d db"
+  backend:
+    name: build and run backend
+    runs-on: self-hosted
+    needs: db
+    steps:
+      - name: "📦 build app"
+        run: "docker compose build backend"
           
       - name: "📦 run app"
-        run: "docker compose up -d"
+        run: "docker compose up -d backend"
+  frontend:
+    name: build and run frontend
+    runs-on: self-hosted
+    needs: backend
+    steps:
+      - name: "📦 build app"
+        run: "docker compose build frontend"
+          
+      - name: "📦 run app"
+        run: "docker compose up -d frontend"
+  bot:
+    name: build and run bot
+    runs-on: self-hosted
+    needs: [db, backend]
+    steps:
+      - name: "📦 build app"
+        run: "docker compose build bot"
+          
+      - name: "📦 run app"
+        run: "docker compose up -d bot"

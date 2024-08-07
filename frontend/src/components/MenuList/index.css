@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
 
-
-
 .Items {
     display: flex;
     width: 100%;
@@ -29,7 +27,7 @@
     background-color: white;
 }
 
-.arrow{
+.arrow {
     float: right;
 }
 
@@ -48,9 +46,7 @@
 }
 
 
-.todoItem:first-child {
-
-}
+.todoItem:first-child {}
 
 .date {
     font-size: 10px;

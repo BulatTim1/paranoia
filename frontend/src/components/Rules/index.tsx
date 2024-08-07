@@ -14,7 +14,7 @@ export const Rules = () => {
             <a href="/" className="BackButton">Назад</a>
             <List>
                 <Section>
-                    <iframe src="https://rutube.ru/play/embed/19ae14bc3620a33a69e3cbc731e43a38"></iframe>
+                    <iframe src="https://www.youtube.com/embed/NVdYeQisJ1Y"></iframe>
                 </Section>
 
                 <Cell
