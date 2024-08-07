@@ -171,7 +171,14 @@ class LizardOrm(Base):
     user_id = sa.Column(sa.Integer, sa.ForeignKey('user.id'))
     round_id = sa.Column(sa.Integer, sa.ForeignKey('round.id'))
     task_id = sa.Column(sa.Integer, sa.ForeignKey('task.id'), nullable=True, default=None) # TODO: review this
-    task = sa.relationship("Task")
+
+    @property
+    def task(self):
+        task = None
+        with Session() as session:
+            task = session.query(TaskOrm).filter_by(id=self.task_id).one()
+        return task
+
 
 class LizardModel(BaseModel):
     model_config = ConfigDict(from_attributes=True)
