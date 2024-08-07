@@ -33,12 +33,14 @@ jobs:
   db:
     name: build and run db
     runs-on: self-hosted
+    needs: docker
     steps:
       - name: "📦 build app"
         run: "docker compose up -d db"
   backend:
     name: build and run backend
     runs-on: self-hosted
+    needs: db
     steps:
       - name: "📦 build app"
         run: "docker compose build backend"
@@ -48,6 +50,7 @@ jobs:
   frontend:
     name: build and run frontend
     runs-on: self-hosted
+    needs: backend
     steps:
       - name: "📦 build app"
         run: "docker compose build frontend"
@@ -57,6 +60,7 @@ jobs:
   bot:
     name: build and run bot
     runs-on: self-hosted
+    needs: [db, backend]
     steps:
       - name: "📦 build app"
         run: "docker compose build bot"
