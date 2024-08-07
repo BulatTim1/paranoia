@@ -1,5 +1,5 @@
 import React from "react";
-import { retrieveLaunchParams } from '@telegram-apps/sdk';
+import {retrieveLaunchParams} from '@telegram-apps/sdk';
 import { Button, Navigation, Cell, Badge, Avatar, Info, Section, List, Image } from "@telegram-apps/telegram-ui";
 
 import "./index.css"
@@ -15,14 +15,7 @@ export const MainMenu = () => {
         navigate(path);
     }
 
-    const { initDataRaw } = retrieveLaunchParams();
-    console.log(initDataRaw)
-    // fetch('https://example.com/api', {
-    //     method: 'POST',
-    //     headers: {
-    //         Authorization: `tma ${initDataRaw}`
-    //     },
-    // });
+
 
 
     return (
@@ -31,9 +24,9 @@ export const MainMenu = () => {
             <Section>
                 {instruction.map((el) => (
                     <Cell onClick={() => handleClick(el.path)}
-                        before={<Image size={48} src={el.image}></Image>}
-                        after={<Navigation className="arrow" />}
-                        subtitle={el.description}
+                          before={<Image size={48} src={el.image}></Image>}
+                          after={<Navigation className="arrow" />}
+                          subtitle={el.description}
                     >
                         {el.text}
                     </Cell>
@@ -43,9 +36,9 @@ export const MainMenu = () => {
             <Section>
                 {game_menu.map((el) => (
                     <Cell onClick={() => handleClick(el.path)}
-                        before={<Image size={48} src={el.image}></Image>}
-                        after={<Navigation className="arrow" />}
-                        subtitle={el.description}
+                          before={<Image size={48} src={el.image}></Image>}
+                          after={<Navigation className="arrow" />}
+                          subtitle={el.description}
                     >
                         {el.text}
                     </Cell>
