@@ -22,6 +22,7 @@ class User(Base):
     joined_at = sa.Column(sa.DateTime, default=sa.func.now())
     is_banned = sa.Column(sa.Boolean, default=False)
     points = sa.Column(sa.Integer, default=0)
+    
     def login_user(self, user_id) -> bool:
         res = False
         with Session() as session:
@@ -33,14 +34,17 @@ class User(Base):
             except:
                 session.rollback()
         return res
+    
     @staticmethod
     def get_user_by_guid(guid_token):
         with Session() as session:
             return session.query(User).filter_by(guid_token=guid_token).first()
+        
     @staticmethod
     def get_user_by_tg_id(telegram_id):
         with Session() as session:
             return session.query(User).filter_by(telegram_id=telegram_id).first()
+        
     @staticmethod
     def get_user_by_id(user_id):
         with Session() as session:
