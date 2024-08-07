@@ -29,11 +29,11 @@ async def add_category(message: Message, state: FSMContext):
     logging.info(message)
     user_id = message.from_user.id
     # user = User.get_user_by_guid(message.text.strip())
-    user = User.add_user(user_id, message.text.strip())
     if user:
         user.login_user(user_id)
         await message.reply("Авторизация успешна", reply_markup=keyboard)
     elif user_auth(user_id):
         await message.reply("Ты уже авторизован :3", reply_markup=keyboard)
     else:
-        await message.reply("Неверный токен")
+        user = User.add_user(user_id, message.text.strip())
+        await message.reply("Добро пожаловать в игру!", reply_markup=keyboard)
