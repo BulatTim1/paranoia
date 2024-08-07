@@ -7,7 +7,7 @@ from aiogram.types import (CallbackQuery, InlineKeyboardButton,
                            InlineKeyboardMarkup, Message, WebAppInfo)
 from aiogram.utils import executor
 from aiogram.utils.markdown import hbold
-from globals import User, bot, dp
+from globals import User, bot, dp, logger
 
 
 class Guid(StatesGroup):
@@ -17,7 +17,7 @@ class Guid(StatesGroup):
 async def add_category(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
     user = User.get_user_by_guid(message.text.strip())
-    print(message.text.strip())
+    logger.info(message.text.strip())
     if user:
         res = user.init_user(user_id)
         if res:
