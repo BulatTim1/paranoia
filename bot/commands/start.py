@@ -2,7 +2,7 @@ import logging
 from aiogram.fsm.context import FSMContext
 from aiogram.filters import Command, CommandStart
 from aiogram import types, Router
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo, Message
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, WebAppInfo
 from states.login import Guid
 from globals import dp, User
 
@@ -16,7 +16,7 @@ form_router = Router()
 async def send_welcome(message: Message, state: FSMContext):
     logging.info(message)
     if user_auth(message.from_user.id):
-        ikb = InlineKeyboardButton("Перейти", web_app=WebAppInfo(url='https://paranoia.bulattim.ru/'))
+        ikb = InlineKeyboardButton("Перейти", web_app=WebAppInfo('https://paranoia.bulattim.ru/'))
 
         keyboard = InlineKeyboardMarkup()
         keyboard.add(ikb)
