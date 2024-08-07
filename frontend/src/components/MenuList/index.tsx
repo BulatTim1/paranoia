@@ -1,6 +1,5 @@
 import React from "react";
-import {Button, Navigation, Cell, Badge, Avatar, Info, Section, List} from "@telegram-apps/telegram-ui";
-import {retrieveLaunchParams} from '@telegram-apps/sdk';
+import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import { Button, Navigation, Cell, Badge, Avatar, Info, Section, List, Image } from "@telegram-apps/telegram-ui";
 
 import "./index.css"
@@ -16,7 +15,7 @@ export const MainMenu = () => {
         navigate(path);
     }
 
-    const {initDataRaw} = retrieveLaunchParams();
+    const { initDataRaw } = retrieveLaunchParams();
     console.log(initDataRaw)
     // fetch('https://example.com/api', {
     //     method: 'POST',
