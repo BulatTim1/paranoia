@@ -68,6 +68,14 @@ async def get_current_user(token: Annotated[str, Depends(security)]) -> UserOrm:
         raise credentials_exception
     return user
 
+
+async def get_current_round() -> RoundOrm:
+    round = RoundOrm.currently_running()
+    if round is None:
+        raise HTTPException(status_code=404, detail="No current round")
+    return round
+
+
 @app.get('/token-validate')
 async def validate(token: str = Depends(security)) -> dict:
     token = unquote(token)
@@ -96,49 +104,47 @@ async def get_leaderboards() -> list[UserModel]:
 @app.get("/round")
 async def get_round() -> RoundModel:
     """Get current round data."""
-    round = None
-    with Session() as session:
-        round = session.query(RoundOrm).order_by(RoundOrm.issued_at.desc()).first()
+    round = RoundOrm.most_recent()
     if not round:
         raise HTTPException(status_code=404, detail="Round not found")
     return round.to_model()
 
+
 @app.post("/guess")
-async def guess(model: GuessPostModel, current_user: Annotated[UserOrm, Depends(get_current_user)]) -> bool:
+async def guess(
+    model: GuessPostModel,
+    current_round: Annotated[RoundOrm, Depends(get_current_round)],
+    current_user: Annotated[UserOrm, Depends(get_current_user)],
+) -> bool:
     """Make a guess."""
     with Session() as session:
-        round = session.query(RoundOrm).order_by(RoundOrm.issued_at.desc()).first()
-        if round is None:
-            raise HTTPException(status_code=404, detail="Round not found")
-        if round.issued_at + round.round_duration < datetime.now():
-            raise HTTPException(status_code=400, detail="Round is over")
-        if model.guess == round.winner:
+        if model.guess == current_round.winner:
             current_user.points += 1
             session.commit()
             return True
         return False
 
+
 @app.post("/survey")
-async def vote(model: SurveyPostModel, current_user: Annotated[UserOrm, Depends(get_current_user)]) -> SurveyTaskModel | None:
+async def vote(
+    model: SurveyPostModel,
+    current_round: Annotated[RoundOrm, Depends(get_current_round)],
+    current_user: Annotated[UserOrm, Depends(get_current_user)],
+) -> SurveyTaskModel | None:
     with Session() as session:
         try:
-            round = session.query(RoundOrm).order_by(RoundOrm.issued_at.desc()).first()
-            if round is None:
-                raise HTTPException(status_code=404, detail="Round not found")
-            if round.issued_at + round.round_duration < datetime.now():
-                raise HTTPException(status_code=400, detail="Round is over")
-            survey = session.query(SurveyOrm).filter_by(user_id=current_user.id, round_id=round.id)
+            survey = session.query(SurveyOrm).filter_by(user_id=current_user.id, round_id=current_round.id)
             survey.answer = model.answer
             session.commit()
         except:
             session.rollback()
             traceback.print_exc()
-        surveys = session.query(SurveyOrm).filter_by(round_id=round.id, user_id=current_user.id).all()
-        if len(surveys) <= round.survey_count:
+        surveys = session.query(SurveyOrm).filter_by(round_id=current_round.id, user_id=current_user.id).all()
+        if len(surveys) <= current_round.survey_count:
             new_survey = None
             try:
-                tasks = session.query(TaskOrm).filter_by(round_id=round.id, is_active=True).all()
-                new_survey = SurveyOrm(user_id=current_user.id, round_id=round.id, 
+                tasks = session.query(TaskOrm).filter_by(round_id=current_round.id, is_active=True).all()
+                new_survey = SurveyOrm(user_id=current_user.id, round_id=current_round.id, 
                                        task_id=random.choice(filter(lambda x: x.id not in 
                                                                     [survey.task_id for survey in surveys], 
                                                                     tasks)).id)
