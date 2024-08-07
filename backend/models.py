@@ -77,6 +77,7 @@ class UserModel(BaseModel):
 
 class GameConfig(Base):
     __tablename__ = 'game_config'
+    id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     start_round = sa.Column(sa.Time, default=datetime.time(6, 0))
     round_duration = sa.Column(sa.Interval, default=datetime.timedelta(hours=15))
     identified_threshold = sa.Column(sa.Integer, default=10)
