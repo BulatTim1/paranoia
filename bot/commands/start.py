@@ -1,15 +1,9 @@
-import aiogram
-from aiogram import Bot, Dispatcher
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
+import logging
 from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.filters.state import State, StatesGroup
-from aiogram.types import CallbackQuery, Message
-from aiogram.utils import executor
-from aiogram.utils.markdown import hbold
 from aiogram import types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from states.login import Guid
-from globals import bot, dp, User
+from globals import dp, User
 
 
 def user_auth(user_id):
@@ -19,6 +13,7 @@ def user_auth(user_id):
 
 @dp.message_handler(commands=['start'], state="*")
 async def send_welcome(message: types.Message, state: FSMContext):
+    logging.info(message)
     await state.finish()
     if user_auth(message.from_user.id):
         ikb = InlineKeyboardButton("Перейти", web_app=WebAppInfo(url='https://paranoia.bulattim.ru/'))

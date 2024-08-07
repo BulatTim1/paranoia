@@ -48,4 +48,4 @@ class User(Base):
     @staticmethod
     def get_user_by_id(user_id):
         with Session() as session:
-            return session.query(UserOrm).filter_by(id=user_id).first()
+            return session.query(User).filter_by(id=user_id).first()
