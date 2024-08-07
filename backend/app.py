@@ -86,6 +86,22 @@ async def maybe_get_current_lizard(
         )
     return lizard
 
+
+async def get_current_guesses(
+    current_user: Annotated[UserOrm, Depends(get_current_user)],
+    current_round: Annotated[RoundOrm, Depends(get_current_round)],
+    current_lizard: Annotated[Optional[LizardOrm], Depends(maybe_get_current_lizard)],
+) -> list[GuessOrm]:
+    if current_lizard is not None:
+        raise HTTPException(status_code=400, detail="Lizards can't guess")
+    with Session() as session:
+        return (
+            session.query(GuessOrm)
+            .filter_by(user_id=current_user.id, round_id=current_round.id)
+            .all()
+        )
+
+
 @app.get('/token-validate')
 async def validate(token: str = Depends(security)) -> dict:
     token = unquote(unquote(token))
@@ -136,18 +152,25 @@ async def guess(
     model: GuessPostModel,
     current_round: Annotated[RoundOrm, Depends(get_current_round)],
     current_user: Annotated[UserOrm, Depends(get_current_user)],
-    current_lizard: Annotated[Optional[LizardOrm], Depends(maybe_get_current_lizard)],
+    current_guesses: Annotated[list[GuessOrm], Depends(get_current_guesses)],
 ) -> bool:
     """Make a guess."""
-    if current_lizard is not None:
-        raise HTTPException(status_code=400, detail="Lizards can't guess")
+    if len(current_guesses) >= current_round.lizards_count:
+        raise HTTPException(status_code=400, detail="Out of guesses")
     guessed_user = UserOrm.get_user_by_id(model.guessed_user_id)
     guessed_lizard = maybe_get_current_lizard(guessed_user, current_round)
-    if guessed_lizard is not None:
+    is_correct = guessed_lizard is not None
+    guess = GuessOrm(
+        user_id=current_user.id,
+        guessed_user_id=guessed_user.id,
+        round_id=current_round.id,
+        is_correct=is_correct,
+    )
+    with Session() as session:
+        session.add(guess)
+    if is_correct:
         current_user.points += 1
-        return True
-    else:
-        return False
+    return is_correct
 
 
 @app.post("/survey")
