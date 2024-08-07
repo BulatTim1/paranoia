@@ -105,11 +105,9 @@ async def get_round() -> RoundModel:
 async def guess(model: GuessPostModel, current_user: Annotated[UserOrm, Depends(get_current_user)]) -> bool:
     """Make a guess."""
     with Session() as session:
-        round = session.query(RoundOrm).order_by(RoundOrm.issued_at.desc()).first()
+        round = RoundOrm.currently_running()
         if round is None:
-            raise HTTPException(status_code=404, detail="Round not found")
-        if round.issued_at + round.round_duration < datetime.now():
-            raise HTTPException(status_code=400, detail="Round is over")
+            raise HTTPException(status_code=404, detail="No current round")
         if model.guess == round.winner:
             current_user.points += 1
             session.commit()
