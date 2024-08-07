@@ -18,9 +18,7 @@ import traceback
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 1
 
-main_app = FastAPI(servers=[{"url": "https://paranoia.bulattim.ru/api/"}])
-app = FastAPI()
-app.mount("/api", main_app)
+app = FastAPI(servers=[{"url": "/api"},{"url": "https://paranoia.bulattim.ru/api/"}])
 
 security = APIKeyCookie(name="access_token")
 logger = logging.getLogger("uvicorn")
