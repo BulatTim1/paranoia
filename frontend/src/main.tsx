@@ -16,6 +16,7 @@ import {Task2} from "./components/result/task2.tsx";
 import {Task3} from "./components/result/task3.tsx";
 import {Task4} from "./components/result/task4.tsx";
 import {Task5} from "./components/result/task5.tsx";
+import {Leaderboard} from "./components/Leaderboard";
 
 export const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
     {
         path: "task5",
         element: <Task5 />
+    },
+    {
+        path: "rating",
+        element: <Leaderboard/>
     }
 ]);
 
