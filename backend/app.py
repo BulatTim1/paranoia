@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
 import json
 import logging
-from typing import Annotated
+from typing import Annotated, Optional
 import os
 import hmac
 import hashlib
@@ -76,10 +76,10 @@ async def get_current_round() -> RoundOrm:
     return round
 
 
-async def get_current_lizard(
+async def maybe_get_current_lizard(
     current_user: Annotated[UserOrm, Depends(get_current_user)],
     current_round: Annotated[RoundOrm, Depends(get_current_round)],
-) -> LizardOrm:
+) -> Optional[LizardOrm]:
     lizard = None
     with Session() as session:
         lizard = (
@@ -87,8 +87,6 @@ async def get_current_lizard(
             .filter_by(user_id=current_user.id, round_id=current_round.id)
             .one()
         )
-    if lizard is None:
-        raise HTTPException(status_code=400, detail="Not a current lizard")
     return lizard
 
 
@@ -174,11 +172,11 @@ async def vote(
         return None
 
 
-# @app.get("/tasks")
-# async def get_tasks(
-#     model: SurveyPostModel,
-#     current_round: Annotated[RoundOrm, Depends(get_current_round)],
-#     current_user: Annotated[UserOrm, Depends(get_current_user)],
-#     current_lizard: Annotated[LizardOrm, Depends(get_current_lizard)],
-# ) -> SurveyTaskModel | None:
-#     with Session() as session:
+@app.get("/tasks")
+async def get_tasks(
+    current_lizard: Annotated[Optional[LizardOrm], Depends(maybe_get_current_lizard)],
+) -> TaskModel | None:
+    if current_lizard is None:
+        return None
+    else:
+        return current_lizard.task.to_model()
