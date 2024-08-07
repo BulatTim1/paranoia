@@ -1,3 +1,5 @@
+import logging
+import sys
 from aiogram import executor as ex
 from commands import start
 from globals import dp
@@ -8,4 +10,5 @@ async def bot_callback(x):
 
 
 if __name__ == '__main__':
-    ex.start_polling(dp, on_startup=bot_callback)
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+    ex.start_polling(dp, on_startup=bot_callback, skip_updates=True)

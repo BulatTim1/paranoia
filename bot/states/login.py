@@ -19,11 +19,10 @@ class Guid(StatesGroup):
 async def add_category(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
     user = User.get_user_by_guid(message.text.strip())
+    print(message.text.strip())
     if user:
         res = user.init_user(user_id)
         if res:
             await message.reply("Авторизация успешна")
-        else:
-            await message.reply("Неверный токен")
-
+    await message.reply("Неверный токен")
     await state.finish()
