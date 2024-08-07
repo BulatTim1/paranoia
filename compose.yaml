@@ -15,6 +15,13 @@ services:
     env_file: .env
     depends_on:
       - db
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    environment:
+      - VIRTUAL_HOST=paranoia.bulattim.ru
+      - VIRTUAL_PORT=80
 
 
 volumes:

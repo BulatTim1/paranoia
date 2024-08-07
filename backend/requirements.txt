@@ -1,4 +1,4 @@
-fastapi
+fastapi[standard]
 pyjwt
 sqlalchemy==2.0.29
 psycopg2-binary
