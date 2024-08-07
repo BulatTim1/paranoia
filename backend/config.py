@@ -8,7 +8,6 @@ class Config:
     TG_ADMIN = json.loads(os.environ.get('TG_ADMINS', '[]'))
     TOKEN_EXPIRE_IN_SECONDS = int(os.environ.get('TOKEN_EXPIRE_IN_SECONDS', "86400"))
 
-
     POSTGRES_USER = os.environ.get('POSTGRES_USER', 'test')
     POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 'test')
     POSTGRES_DB = os.environ.get('POSTGRES_DB', 'test')

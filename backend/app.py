@@ -19,7 +19,7 @@ app = FastAPI(servers=[{"url": "/api"},{"url": "https://paranoia.bulattim.ru/api
 
 security = APIKeyCookie(name="access_token")
 logger = logging.getLogger("uvicorn")
-secret_key = hmac.new('WebAppData'.encode(), Config.TELEGRAM_BOT_TOKEN.encode(), hashlib.sha256).digest()
+secret_key = hmac.new('WebAppData'.encode(), Config.TG_TOKEN.encode(), hashlib.sha256).digest()
 
 async def validate_telegram_data(data: str) -> bool:
     # data_check_string = ...
@@ -67,13 +67,11 @@ async def get_current_user(token: Annotated[str, Depends(security)]) -> UserOrm:
         raise credentials_exception
     return user
 
-
 async def get_current_round() -> RoundOrm:
     round = RoundOrm.currently_running()
     if round is None:
         raise HTTPException(status_code=404, detail="No current round")
     return round
-
 
 async def maybe_get_current_lizard(
     current_user: Annotated[UserOrm, Depends(get_current_user)],
@@ -87,7 +85,6 @@ async def maybe_get_current_lizard(
             .one()
         )
     return lizard
-
 
 @app.get('/token-validate')
 async def validate(token: str = Depends(security)) -> dict:
