@@ -77,9 +77,10 @@ class UserModel(BaseModel):
 
 class GameConfig(Base):
     __tablename__ = 'game_config'
+    id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     start_round = sa.Column(sa.Time, default=datetime.time(6, 0))
     round_duration = sa.Column(sa.Interval, default=datetime.timedelta(hours=15))
-    identified_threshold = sa.Column(sa.Integer, default=10, min=0, max=100)
+    identified_threshold = sa.Column(sa.Integer, default=10)
     lizards_count = sa.Column(sa.Integer, default=3)
     survey_count = sa.Column(sa.Integer, default=5)
 
@@ -88,7 +89,7 @@ class RoundOrm(Base):
     id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     issued_at = sa.Column(sa.Date, default=sa.func.now())
     winner = sa.Column(sa.Enum('rus', 'liz'), nullable=True, default=None)
-    identified_threshold = sa.Column(sa.Integer, default=10, min=0, max=100)
+    identified_threshold = sa.Column(sa.Integer, default=10)
     start_round = sa.Column(sa.Time, default=datetime.time(6, 0)) # utc
     round_duration = sa.Column(sa.Interval, default=datetime.timedelta(hours=15))
     lizards_count = sa.Column(sa.Integer, default=3)
