@@ -1,3 +1,4 @@
+import logging
 from aiogram.dispatcher import FSMContext
 from aiogram import types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
@@ -12,6 +13,7 @@ def user_auth(user_id):
 
 @dp.message_handler(commands=['start'], state="*")
 async def send_welcome(message: types.Message, state: FSMContext):
+    logging.info(message)
     await state.finish()
     if user_auth(message.from_user.id):
         ikb = InlineKeyboardButton("Перейти", web_app=WebAppInfo(url='https://paranoia.bulattim.ru/'))
