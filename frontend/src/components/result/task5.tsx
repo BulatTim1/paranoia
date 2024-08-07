@@ -1,8 +1,7 @@
-import {Cell, Image, List, Navigation, Section} from "@telegram-apps/telegram-ui";
+import {Cell, List, Navigation, Section} from "@telegram-apps/telegram-ui";
 
 import "./index.css"
 import {useNavigate} from "react-router-dom";
-import {game_menu} from "../../menu_routes.ts";
 
 
 export const Task5 = () => {
