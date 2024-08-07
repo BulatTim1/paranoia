@@ -6,4 +6,4 @@ from models import User, Session
 
 storage = MemoryStorage()
 bot = Bot(token=Config.TG_TOKEN)
-dp = Dispatcher(storage=storage)
+dp = Dispatcher(bot, storage=storage)

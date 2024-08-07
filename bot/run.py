@@ -13,7 +13,7 @@ import asyncio
 
 async def main()->None:
     bot.session.middleware(RequestLogging(ignore_methods=[GetUpdates]))
-    await dp.start_polling(bot, allowed_updates=["message"])
+    await dp.start_polling(allowed_updates=["message"])
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
