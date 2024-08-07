@@ -12,7 +12,7 @@ def user_auth(user_id):
 
 form_router = Router()
 
-@form_router.message(CommandStart(), state="*")
+@form_router.message(CommandStart())
 async def send_welcome(message: Message, state: FSMContext):
     logging.info(message)
     if user_auth(message.from_user.id):
@@ -38,7 +38,6 @@ async def add_category(message: Message, state: FSMContext):
         if res:
             await message.reply("Авторизация успешна")
             ikb = InlineKeyboardButton("Перейти", web_app=WebAppInfo(url='https://paranoia.bulattim.ru/'))
-
             keyboard = InlineKeyboardMarkup()
             keyboard.add(ikb)
     await message.reply("Неверный токен")
