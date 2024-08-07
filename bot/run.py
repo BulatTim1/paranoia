@@ -15,8 +15,8 @@ import asyncio
 
 async def main()->None:
     bot = Bot(token=Config.TG_TOKEN)
-    bot.session.middleware(RequestLogging(ignore_methods=[GetUpdates]))
-    await dp.start_polling(bot, allowed_updates=["message"])
+    bot.session.middleware(RequestLogging())
+    await dp.start_polling(bot)
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
