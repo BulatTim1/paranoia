@@ -16,7 +16,7 @@ form_router = Router()
 async def send_welcome(message: Message, state: FSMContext):
     logging.info(message)
     if user_auth(message.from_user.id):
-        ikb = InlineKeyboardButton("Перейти", web_app=WebAppInfo('https://paranoia.bulattim.ru/'))
+        ikb = InlineKeyboardButton(web_app=WebAppInfo('https://paranoia.bulattim.ru/'))
 
         keyboard = InlineKeyboardMarkup()
         keyboard.add(ikb)
