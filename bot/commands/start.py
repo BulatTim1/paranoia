@@ -33,7 +33,7 @@ async def add_category(message: Message, state: FSMContext):
     user_id = message.from_user.id
     user = User.get_user_by_guid(message.text.strip())
     if user:
-        res = user.init_user(user_id)
+        res = user.login_user(user_id)
         if res:
             await message.reply("Авторизация успешна")
             wa = WebAppInfo(url='https://paranoia.bulattim.ru/')
