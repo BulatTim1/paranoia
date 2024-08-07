@@ -23,10 +23,10 @@ class User(Base):
     is_banned = sa.Column(sa.Boolean, default=False)
     points = sa.Column(sa.Integer, default=0)
     
-    def login_user(self, user_id) -> bool:
+    def login_user(self, telegram_id) -> bool:
         res = False
         with Session() as session:
-            self.telegram_id = user_id
+            self.telegram_id = telegram_id
             self.guid_token = None
             try:
                 session.commit()

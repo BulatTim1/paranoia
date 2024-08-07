@@ -61,7 +61,7 @@ async def get_current_user(token: Annotated[str, Depends(security)]) -> UserOrm:
         res = validate_telegram_data(token)
     except:
         raise credentials_exception
-    print(res)
+    logger.info(res)
     if not res:
         raise credentials_exception
     telegram_id = data.get("id")
@@ -94,8 +94,8 @@ async def maybe_get_current_lizard(
 
 @app.get('/token-validate')
 async def validate(token: str = Depends(security)) -> dict:
-    token = unquote(token)
-    return json.loads(token[token.find('{'):token.find('},') + 1]) if validate_telegram_data(token) else None
+    token = unquote(unquote(token))
+    return json.loads(token[token.find('{'):token.find('}&') + 1]) if validate_telegram_data(token) else None
 
 # messaging functions
 @app.get("/self")
@@ -169,7 +169,7 @@ async def vote(
             session.commit()
         except:
             session.rollback()
-            traceback.print_exc()
+            logger.error(traceback.format_exc())
         surveys = session.query(SurveyOrm).filter_by(round_id=current_round.id, user_id=current_user.id).all()
         if len(surveys) <= current_round.survey_count:
             new_survey = None
