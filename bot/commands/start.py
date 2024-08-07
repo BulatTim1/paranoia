@@ -28,7 +28,7 @@ async def send_welcome(message: Message, state: FSMContext):
         await message.reply("Введите токен!")
         await state.update_data(guid=Guid.guid)
 
-@form_router.message_handler(state=Guid.guid)
+@form_router.message(state=Guid.guid)
 async def add_category(message: Message, state: FSMContext):
     logging.info(message)
     user_id = message.from_user.id
