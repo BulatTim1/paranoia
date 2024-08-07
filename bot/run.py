@@ -7,4 +7,4 @@ import asyncio
 #     print("Started")
 
 if __name__ == '__main__':
-    asyncio.run(dp.start_polling(bot, skip_updates=True))
+    asyncio.run(dp.start_polling(bot, allowed_updates=["message"]))
