@@ -116,13 +116,24 @@ async def get_leaderboards() -> list[UserModel]:
         users = session.query(UserOrm).order_by(UserOrm.points.desc()).limit(100).all()
         return [user.to_model() for user in users]
 
+
 @app.get("/round")
-async def get_round() -> RoundModel:
+async def get_round_data(
+    current_user: Annotated[UserOrm, Depends(get_current_user)],
+    recent_round: Annotated[Optional[RoundOrm], Depends(RoundOrm.most_recent)],
+    current_lizard: Annotated[Optional[LizardOrm], Depends(maybe_get_current_lizard)],
+) -> RoundModel:
     """Get current round data."""
-    round = RoundOrm.most_recent()
-    if not round:
-        raise HTTPException(status_code=404, detail="Round not found")
-    return round.to_model()
+    if recent_round is None:
+        raise HTTPException(status_code=404, detail="No recent round")
+    return RoundDataModel(
+        start_round=recent_round.start_round,
+        round_duration=recent_round.round_duration,
+        is_over=recent_round.is_over,
+        lizards_count=recent_round.lizards_count,
+        is_lizard=(current_lizard is not None),
+        winner=recent_round.winner,
+    )
 
 
 @app.post("/guess")

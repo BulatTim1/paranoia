@@ -90,7 +90,12 @@ class RoundOrm(Base):
     issued_at = sa.Column(sa.Date, default=sa.func.now())
     winner = sa.Column(sa.Enum('rus', 'liz'), nullable=True, default=None)
     identified_threshold = sa.Column(sa.Integer, default=10)
-    start_round = sa.Column(sa.Time, default=datetime.time(6, 0)) # utc
+    start_round = sa.Column(
+        sa.DateTime,
+        default=lambda: datetime.datetime.combine(
+            datetime.date.today(), datetime.time(6, 0)
+        ),
+    )  # utc
     round_duration = sa.Column(sa.Interval, default=datetime.timedelta(hours=15))
     lizards_count = sa.Column(sa.Integer, default=3)
     survey_count = sa.Column(sa.Integer, default=5)
@@ -103,13 +108,13 @@ class RoundOrm(Base):
 
     @property
     def is_over(self):
-        return datetime.now() > self.issued_at + self.round_duration
+        return datetime.now() > self.start_round + self.round_duration
 
     @staticmethod
     def most_recent():
         round = None
         with Session() as session:
-            round = session.query(RoundOrm).order_by(RoundOrm.issued_at.desc()).first()
+            round = session.query(RoundOrm).order_by(RoundOrm.issued_at.desc()).one()
         return round
 
     @staticmethod
@@ -131,6 +136,17 @@ class RoundModel(BaseModel):
     round_duration: datetime.timedelta
     lizards_count: int
     survey_count: int
+
+
+class RoundDataModel(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    start_round: datetime.datetime
+    round_duration: datetime.timedelta
+    is_over: bool
+    lizards_count: int
+    is_lizard: bool
+    winner: str
+
 
 class TaskOrm(Base):
     __tablename__ = 'task'
