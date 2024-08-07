@@ -1,30 +1,33 @@
-# paranoia
-Paranoia game for LetoCTF Hackathon
+# Русы против ящеров
+Игра "Русы против Ящеров" для хакатона LetoCTF
 
-# services
- - bot - telegram bot for push notifications
+# сервисы
+ - bot - телеграм бот для авторизации
    - aiogram
- - backend - telegram web app for players and admins
+ - backend - API для Telegram Mini App
    - fastapi 
- - frontend - telegram web app for players and admins
+ - frontend - наверное и так ясно?) фронт это фронт
    - react (так решил вебер)
- - db - postgres
+ - db
+   - postgres
    - sqlalchemy 
 
-# how to start
-1. write `.env` from template
+# как запустить
+1. Написать `.env` файл по примеру
 2. `docker compose up -d --build`
 3. profit
 
-# detailed services
+# про сервисы детальнее
 1. web (frontend + backend)
-   - give tasks from pool to users
-   - push notifications to bot for notifications (round start, round stop, GGWP) (TBD)
-   - checkout leaderboard
-   - survey in the end of round
-   - admin panel (TBD)
-     - create tasks (TBD)
+   - давать ящерам задачи из пула
+   - отправлять уведомления в бота про старт/окончание раунда (TBD)
+   - просмотр рейтинга
+   - опросник русов в конце раунда, чтобы проверить ящеров на выполнение поставленной задачи
+   - панелька админа подвала (TBD)
+     - создавать таски (TBD)
+     - настраивать раунды (TBD)
      - TBD
 2. bot
-   - authorize by token
-   - waiting for notifications and push them to specific group (probably)
+   - авторизоваться с помощью токена
+   - отправка уведомлений (probably)
+   - TBD
