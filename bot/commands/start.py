@@ -42,4 +42,3 @@ async def add_category(message: Message, state: FSMContext):
             keyboard = InlineKeyboardMarkup()
             keyboard.add(ikb)
     await message.reply("Неверный токен")
-    await state.finish()
