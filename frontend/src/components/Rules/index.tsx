@@ -1,5 +1,4 @@
-import React from "react";
-import {Cell, Section} from "@telegram-apps/telegram-ui";
+import {Cell, Section, List} from "@telegram-apps/telegram-ui";
 
 import "./index.css"
 import {
@@ -13,7 +12,7 @@ export const Rules = () => {
     return (
         <div>
             <a href="/" className="BackButton">Назад</a>
-            <list>
+            <List>
                 <Section>
                     <iframe src="https://www.youtube.com/embed/WFC4wxaZ5Qc"></iframe>
                 </Section>
@@ -36,7 +35,7 @@ export const Rules = () => {
                         </div>
                     </SectionFooter>
                 </Section>
-            </list>
+            </List>
         </div>
     )
 }

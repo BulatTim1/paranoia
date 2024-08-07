@@ -1,4 +1,3 @@
-import * as React from "react";
 import { createRoot } from "react-dom/client";
 import {
     createBrowserRouter,
@@ -28,6 +27,7 @@ const router = createBrowserRouter([
     }
 ]);
 
+// @ts-ignore
 createRoot(document.getElementById("root")).render(
     <AppRoot>
         <Layout>

@@ -1,13 +1,9 @@
 import '@telegram-apps/telegram-ui/dist/styles.css';
 
-import {AppRoot, Placeholder} from '@telegram-apps/telegram-ui';
-import '@telegram-apps/telegram-ui/dist/styles.css';
-import {Layout} from "./Layouts/layout.tsx";
+import {AppRoot} from '@telegram-apps/telegram-ui';
 import {MainMenu} from "./components/MenuList";
-import React from "react";
 import {retrieveLaunchParams} from "@telegram-apps/sdk";
 import {SDKProvider} from "@telegram-apps/sdk-react";
-
 
 
 const App = () => {

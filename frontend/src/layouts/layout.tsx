@@ -1,6 +1,6 @@
-import React from "react";
 import "./layout.css"
 
+// @ts-ignore
 export const Layout = ({children}) => {
     return(
         <div className="layout">

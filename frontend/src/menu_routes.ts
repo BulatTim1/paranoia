@@ -1,5 +1,3 @@
-import { Avatar } from "@telegram-apps/telegram-ui"
-
 export const instruction = [
     {
         index: 0,

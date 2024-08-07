@@ -1,10 +1,8 @@
-import React from "react";
-import {retrieveLaunchParams} from '@telegram-apps/sdk';
-import { Button, Navigation, Cell, Badge, Avatar, Info, Section, List, Image } from "@telegram-apps/telegram-ui";
+import {Cell, Image, List, Navigation, Section} from "@telegram-apps/telegram-ui";
 
 import "./index.css"
-import { useNavigate } from "react-router-dom";
-import { instruction, game_menu } from "../../menu_routes.ts";
+import {useNavigate} from "react-router-dom";
+import {game_menu, instruction} from "../../menu_routes.ts";
 
 
 export const MainMenu = () => {

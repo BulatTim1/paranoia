@@ -1,11 +1,9 @@
 import React from "react";
-import {Button, Navigation, Cell, Badge, Avatar, Info, Section, List, Card} from "@telegram-apps/telegram-ui";
+import {Card, List, Section} from "@telegram-apps/telegram-ui";
 
 import "./index.css"
-import {useNavigate} from "react-router-dom";
-import {instruction, game_menu} from "../../menu_routes.ts";
 import {CardCell} from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
-import { CardChip } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip";
+import {CardChip} from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip";
 
 
 export const PlayerTypes = () => {
