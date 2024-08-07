@@ -118,7 +118,7 @@ async def get_leaderboards() -> list[UserModel]:
 
 
 @app.get("/round")
-async def get_round(
+async def get_round_data(
     current_user: Annotated[UserOrm, Depends(get_current_user)],
     recent_round: Annotated[Optional[RoundOrm], Depends(RoundOrm.most_recent)],
     current_lizard: Annotated[Optional[LizardOrm], Depends(maybe_get_current_lizard)],
