@@ -76,6 +76,22 @@ async def get_current_round() -> RoundOrm:
     return round
 
 
+async def get_current_lizard(
+    current_user: Annotated[UserOrm, Depends(get_current_user)],
+    current_round: Annotated[RoundOrm, Depends(get_current_round)],
+) -> LizardOrm:
+    lizard = None
+    with Session() as session:
+        lizard = (
+            session.query(LizardOrm)
+            .filter_by(user_id=current_user.id, round_id=current_round.id)
+            .one()
+        )
+    if lizard is None:
+        raise HTTPException(status_code=400, detail="Not a current lizard")
+    return lizard
+
+
 @app.get('/token-validate')
 async def validate(token: str = Depends(security)) -> dict:
     token = unquote(token)
@@ -156,3 +172,13 @@ async def vote(
             if new_survey is not None:
                 return new_survey.to_model()
         return None
+
+
+# @app.get("/tasks")
+# async def get_tasks(
+#     model: SurveyPostModel,
+#     current_round: Annotated[RoundOrm, Depends(get_current_round)],
+#     current_user: Annotated[UserOrm, Depends(get_current_user)],
+#     current_lizard: Annotated[LizardOrm, Depends(get_current_lizard)],
+# ) -> SurveyTaskModel | None:
+#     with Session() as session:
