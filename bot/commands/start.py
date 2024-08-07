@@ -13,7 +13,7 @@ def user_auth(user_id):
 form_router = Router()
 
 @form_router.message(CommandStart())
-async def send_welcome(message: Message, state: FSMContext):
+async def send_welcome(message: Message):
     logging.info(message)
     if user_auth(message.from_user.id):
         ikb = InlineKeyboardButton("Перейти", web_app=WebAppInfo(url='https://paranoia.bulattim.ru/'))
@@ -29,7 +29,7 @@ async def send_welcome(message: Message, state: FSMContext):
         await state.update_data(guid=Guid.guid)
 
 @form_router.message(state=Guid.guid)
-async def add_category(message: Message, state: FSMContext):
+async def add_category(message: Message):
     logging.info(message)
     user_id = message.from_user.id
     user = User.get_user_by_guid(message.text.strip())

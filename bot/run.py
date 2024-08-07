@@ -5,7 +5,7 @@ import sys
 
 from aiogram import Bot
 
-from commands.start import send_welcome
+from commands.start import form_router
 from globals import dp, Config
 from aiogram.client.session.middlewares.request_logging import RequestLogging
 from aiogram.methods import GetUpdates
@@ -17,7 +17,7 @@ import asyncio
 async def main()->None:
     bot = Bot(token=Config.TG_TOKEN)
     bot.session.middleware(RequestLogging())
-    dp.register_message_handler(send_welcome)
+    dp.include_router(form_router)
     await dp.start_polling(bot)
 
 if __name__ == '__main__':
