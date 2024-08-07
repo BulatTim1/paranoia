@@ -27,13 +27,13 @@ const AdaptiveVideoBox = ({videoSrc}) => {
         };
     }, []);
 
-    const videoStyles = {
+    const videoStyles: React.CSSProperties = {
         width: '100%',
         height: '100%',
         objectFit: 'cover',
     };
 
-    const containerStyles = {
+    const containerStyles: React.CSSProperties = {
         position: 'relative',
         width: '100%',
         height: 0,
