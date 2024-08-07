@@ -93,12 +93,31 @@ class RoundOrm(Base):
     round_duration = sa.Column(sa.Interval, default=datetime.timedelta(hours=15))
     lizards_count = sa.Column(sa.Integer, default=3)
     survey_count = sa.Column(sa.Integer, default=5)
-    
+
     def to_model(self):
         return RoundModel(id=self.id, issued_at=self.issued_at, winner=self.winner, 
                           identified_threshold=self.identified_threshold, start_round=self.start_round, 
                           round_duration=self.round_duration, lizards_count=self.lizards_count, 
                           survey_count=self.survey_count)
+
+    @property
+    def is_over(self):
+        return datetime.now() > self.issued_at + self.round_duration
+
+    @staticmethod
+    def most_recent():
+        round = None
+        with Session() as session:
+            round = session.query(RoundOrm).order_by(RoundOrm.issued_at.desc()).first()
+        return round
+
+    @staticmethod
+    def currently_running():
+        round = RoundOrm.most_recent()
+        if round.is_over:
+            round = None
+        return round
+
 
 class RoundModel(BaseModel):
     model_config = ConfigDict(from_attributes=True)
