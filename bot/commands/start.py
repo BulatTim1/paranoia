@@ -1,20 +1,20 @@
 import logging
 from aiogram.fsm.context import FSMContext
-from aiogram import types
+from aiogram.filters import Command, CommandStart
+from aiogram import types, Router
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from states.login import Guid
 from globals import dp, User
-
 
 def user_auth(user_id):
     user = User.get_user_by_tg_id(user_id)
     return True if user else False
 
+form_router = Router()
 
-@dp.message_handler(commands=['start'], state="*")
+@form_router.message(CommandStart(), state="*")
 async def send_welcome(message: types.Message, state: FSMContext):
     logging.info(message)
-    await state.finish()
     if user_auth(message.from_user.id):
         ikb = InlineKeyboardButton("Перейти", web_app=WebAppInfo(url='https://paranoia.bulattim.ru/'))
 
@@ -22,6 +22,24 @@ async def send_welcome(message: types.Message, state: FSMContext):
         keyboard.add(ikb)
 
         await message.reply("Привет! Ты успешно авторизован!", reply_markup=keyboard)
+        # await state.update_data(guid=Guid.guid)
+        await state.finish()
     else:
         await message.reply("Введите токен!")
         await state.update_data(guid=Guid.guid)
+
+@form_router.message_handler(state=Guid.guid)
+async def add_category(message: types.Message, state: FSMContext):
+    logging.info(message)
+    user_id = message.from_user.id
+    user = User.get_user_by_guid(message.text.strip())
+    if user:
+        res = user.init_user(user_id)
+        if res:
+            await message.reply("Авторизация успешна")
+            ikb = InlineKeyboardButton("Перейти", web_app=WebAppInfo(url='https://paranoia.bulattim.ru/'))
+
+            keyboard = InlineKeyboardMarkup()
+            keyboard.add(ikb)
+    await message.reply("Неверный токен")
+    await state.finish()
