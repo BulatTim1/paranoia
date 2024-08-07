@@ -19,7 +19,7 @@ class Guid(StatesGroup):
 async def add_category(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
     user = User.get_user_by_guid(message.text.strip())
-    logging.info(message.text.strip())
+    logging.getLogger().info(message.text.strip())
     if user:
         res = user.init_user(user_id)
         if res:
