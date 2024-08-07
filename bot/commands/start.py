@@ -12,32 +12,27 @@ def user_auth(user_id):
 
 form_router = Router()
 
+wa = WebAppInfo(url='https://paranoia.bulattim.ru/')
+ikb = InlineKeyboardButton(text="Меню", web_app=wa)
+keyboard = InlineKeyboardMarkup(inline_keyboard=[[ikb]])
+
 @form_router.message(CommandStart())
 async def send_welcome(message: Message, state: FSMContext):
-    logging.info(message)
     if user_auth(message.from_user.id):
-        wa = WebAppInfo(url='https://paranoia.bulattim.ru/')
-        ikb = InlineKeyboardButton(text="Меню", web_app=wa)
-        keyboard = InlineKeyboardMarkup(inline_keyboard=[[ikb]])
-        await message.reply("Привет! Ты успешно авторизован!", reply_markup=keyboard)
-        await state.set_state(Guid.auth)
+        await message.reply("Привет! Ты уже авторизован!", reply_markup=keyboard)
     else:
         await message.reply("Привет, введи токен!")
         await state.set_state(Guid.guid)
 
-@form_router.message()
+@form_router.message(Guid.guid)
 async def add_category(message: Message, state: FSMContext):
     logging.info(message)
     user_id = message.from_user.id
     user = User.get_user_by_guid(message.text.strip())
     if user:
-        res = user.login_user(user_id)
-        if res:
-            wa = WebAppInfo(url='https://paranoia.bulattim.ru/')
-            ikb = InlineKeyboardButton(text="Меню", web_app=wa)
-            keyboard = InlineKeyboardMarkup(inline_keyboard=[[ikb]])
-            await message.reply("Авторизация успешна", reply_markup=keyboard)
+        user.login_user(user_id)
+        await message.reply("Авторизация успешна", reply_markup=keyboard)
     elif user_auth(user_id):
-        await message.reply("Ты уже авторизован")
+        await message.reply("Ты уже авторизован :3", reply_markup=keyboard)
     else:
         await message.reply("Неверный токен")
