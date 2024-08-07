@@ -88,7 +88,7 @@ class RoundOrm(Base):
     __tablename__ = 'round'
     id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     issued_at = sa.Column(sa.Date, default=sa.func.now())
-    winner = sa.Column(sa.Enum('rus', 'liz'), nullable=True, default=None)
+    winner = sa.Column(sa.Enum('rus', 'liz'), name='winner_type', nullable=True, default=None)
     identified_threshold = sa.Column(sa.Integer, default=10)
     start_round = sa.Column(
         sa.DateTime,
