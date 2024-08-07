@@ -95,7 +95,7 @@ async def maybe_get_current_lizard(
 @app.get('/token-validate')
 async def validate(token: str = Depends(security)) -> dict:
     token = unquote(unquote(token))
-    return json.loads(token[token.find('{'):token.find('},') + 1]) if validate_telegram_data(token) else None
+    return json.loads(token[token.find('{'):token.find('}&') + 1]) if validate_telegram_data(token) else None
 
 # messaging functions
 @app.get("/self")
