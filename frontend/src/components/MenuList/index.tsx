@@ -23,7 +23,7 @@ export const MainMenu = () => {
             <header><i>Правила игры</i></header>
             <Section>
                 {instruction.map((el) => (
-                    <Cell
+                    <Cell onClick={() => handleClick(el.path)}
                         before={<Image size={48} src={el.image}></Image>}
                         after={<Navigation className="arrow" />}
                         subtitle={el.description}
@@ -35,8 +35,8 @@ export const MainMenu = () => {
             <header><i>Игра</i></header>
             <Section>
                 {game_menu.map((el) => (
-                    <Cell
-                        before={<Avatar size={48} />}
+                    <Cell onClick={() => handleClick(el.path)}
+                        before={<Image size={48} src={el.image}></Image>}
                         after={<Navigation className="arrow" />}
                         subtitle={el.description}
                     >
