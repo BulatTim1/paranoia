@@ -5,4 +5,5 @@ from config import Config
 from models import User, Session
 
 storage = MemoryStorage()
+bot = Bot(token=Config.TG_TOKEN)
 dp = Dispatcher(storage=storage)
