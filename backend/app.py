@@ -15,13 +15,11 @@ import jwt
 from jwt.exceptions import InvalidTokenError
 import traceback
 
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 1
-
 app = FastAPI(servers=[{"url": "/api"},{"url": "https://paranoia.bulattim.ru/api/"}], root_path='/api')
 
 security = APIKeyCookie(name="access_token")
 logger = logging.getLogger("uvicorn")
+secret_key = hmac.new('WebAppData'.encode(), Config.TELEGRAM_BOT_TOKEN.encode(), hashlib.sha256).digest()
 
 async def validate_telegram_data(data: str) -> bool:
     # data_check_string = ...
@@ -39,13 +37,12 @@ async def validate_telegram_data(data: str) -> bool:
             data_hash = item[5:]
             continue
         if item.startswith("auth_date="):
-            auth_date = int(item[10:-1])
+            auth_date = int(item[10:])
         sorted_data.append(item)
     if data_hash == "" or auth_date == -1:
         return False
-    secret_key = hmac.new('WebAppData'.encode(), Config.TELEGRAM_BOT_TOKEN.encode(), hashlib.sha256).digest()
-    hash = hmac.new(secret_key, "\n".join(sorted_data).encode(), hashlib.sha256).hexdigest()
-    return hash == data_hash and auth_date > datetime.now().timestamp() - Config.TOKEN_EXPIRE_IN_SECONDS
+    gen_hash = hmac.new(secret_key, "\n".join(sorted_data).encode(), hashlib.sha256).hexdigest()
+    return gen_hash == data_hash and auth_date > datetime.now().timestamp() - Config.TOKEN_EXPIRE_IN_SECONDS
 
 async def get_current_user(token: Annotated[str, Depends(security)]) -> UserOrm:
     """Get current user from TMA token."""
