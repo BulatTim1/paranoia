@@ -18,16 +18,14 @@ async def send_welcome(message: Message, state: FSMContext):
     if user_auth(message.from_user.id):
         wa = WebAppInfo(url='https://paranoia.bulattim.ru/')
         ikb = InlineKeyboardButton(text="Меню", web_app=wa)
-
         keyboard = InlineKeyboardMarkup(inline_keyboard=[[ikb]])
-
         await message.reply("Привет! Ты успешно авторизован!", reply_markup=keyboard)
-        # await state.update_data(guid=Guid.guid)
+        await state.set_state(Guid.auth)
     else:
-        await message.reply("Введите токен!")
+        await message.reply("Привет, введи токен!")
         await state.set_state(Guid.guid)
 
-@form_router.message(Guid.guid)
+@form_router.message()
 async def add_category(message: Message, state: FSMContext):
     logging.info(message)
     user_id = message.from_user.id
@@ -35,8 +33,11 @@ async def add_category(message: Message, state: FSMContext):
     if user:
         res = user.login_user(user_id)
         if res:
-            await message.reply("Авторизация успешна")
             wa = WebAppInfo(url='https://paranoia.bulattim.ru/')
             ikb = InlineKeyboardButton(text="Меню", web_app=wa)
             keyboard = InlineKeyboardMarkup(inline_keyboard=[[ikb]])
-    await message.reply("Неверный токен")
+            await message.reply("Авторизация успешна", reply_markup=keyboard)
+    elif user_auth(user_id):
+        await message.reply("Ты уже авторизован")
+    else:
+        await message.reply("Неверный токен")
