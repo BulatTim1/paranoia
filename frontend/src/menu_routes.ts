@@ -36,7 +36,7 @@ export const game_menu = [
         name: "Game results",
         text: "Подведение итогов",
         description: "голосование",
-        path: "/result",
+        path: "/task1",
         image: "https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Bar%20Chart.webp"
     }, {
         index: 3,

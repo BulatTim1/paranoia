@@ -1,30 +1,27 @@
 import {List, Section} from "@telegram-apps/telegram-ui";
 
 import "./index.css"
-import {useEffect, useState} from "react";
-import axios from "axios";
 
 export const LizardTasks = () => {
 
     return (
         <div>
-            <h1 className="text-center">List of Books</h1>
-            <br />
-            <Row xs={1} md={2} className="g-4">
-                {books &&
-                    books.map((book, id) => (
-                        <Col key={id}>
-
-                            <Card key={id}>
-
-                                <Card.Body>
-                                    <Card.Title>{book.title}</Card.Title>
-                                    <Card.Text>{book.description}</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-            </Row>
+            <a href="/" className="BackButton">Назад</a>
+            <List>
+                <header><i>Task 1</i></header>
+                <Section.Footer>
+                    Ты должен подойти и дать пять семерым людям в одном месте
+                </Section.Footer>
+                <header><i>Task 2</i></header>
+                <Section.Footer>
+                    Угостить печеньем/снеками 5 человек
+                </Section.Footer>
+                <header><i>Task 3</i></header>
+                <Section.Footer>
+                    Сфотографироваться с 6 незнакомыми людьми
+                </Section.Footer>
+            </List>
         </div>
-    );
-};
+
+    )
+}
