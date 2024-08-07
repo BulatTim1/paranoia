@@ -20,8 +20,8 @@ export const PlayerTypes = () => {
                                 #1
                             </CardChip>
                             <img
-                                alt="Dog"
-                                src="https://i.imgur.com/892vhef.jpeg"
+                                alt="РУСЫ"
+                                src="/russ.jpg"
                                 style={{
                                     display: 'block',
                                     height: 308,
@@ -45,8 +45,8 @@ export const PlayerTypes = () => {
                                 #2
                             </CardChip>
                             <img
-                                alt="Dog"
-                                src="https://i.imgur.com/892vhef.jpeg"
+                                alt="ЯЩЕР"
+                                src="/lizz.jpg"
                                 style={{
                                     display: 'block',
                                     height: 308,
