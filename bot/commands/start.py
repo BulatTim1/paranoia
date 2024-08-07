@@ -19,8 +19,7 @@ async def send_welcome(message: Message, state: FSMContext):
         wa = WebAppInfo(url='https://paranoia.bulattim.ru/')
         ikb = InlineKeyboardButton(text="Меню", web_app=wa)
 
-        keyboard = InlineKeyboardMarkup()
-        keyboard.add(ikb)
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[[ikb]])
 
         await message.reply("Привет! Ты успешно авторизован!", reply_markup=keyboard)
         # await state.update_data(guid=Guid.guid)
