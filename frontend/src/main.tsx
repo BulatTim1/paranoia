@@ -4,13 +4,14 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import "./index.css"
-import {AppRoot} from "@telegram-apps/telegram-ui";
-import {Layout} from "./layouts/layout.tsx";
+import { AppRoot } from "@telegram-apps/telegram-ui";
+import { Layout } from "./layouts/layout.tsx";
 import '@telegram-apps/telegram-ui/dist/styles.css';
-import {Home} from "./pages/home.tsx";
-import {Players} from "./pages/playertypes.tsx"
-import {Rules} from "./components/Rules";
-import {LizardTasks} from "./components/LizardTasks";
+import { Home } from "./pages/home.tsx";
+import { Players } from "./pages/playertypes.tsx"
+import { Rules } from "./components/Rules";
+import { LizardTasks } from "./components/LizardTasks";
+import { Leaderboard } from "./components/Leaderboard/index.tsx";
 
 
 export const router = createBrowserRouter([
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
     {
         path: "lizard-tasks",
         element: <LizardTasks />,
+    },
+    {
+        path: "rating",
+        element: <Leaderboard />
     }
 ]);
 
