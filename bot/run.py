@@ -5,7 +5,7 @@ import sys
 
 from aiogram import Bot
 
-from bot.commands.start import send_welcome
+from commands.start import send_welcome
 from globals import dp, Config
 from aiogram.client.session.middlewares.request_logging import RequestLogging
 from aiogram.methods import GetUpdates
