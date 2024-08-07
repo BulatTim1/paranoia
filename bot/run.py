@@ -1,14 +1,10 @@
-import logging
-import sys
-from aiogram import executor as ex
-from commands import start
-from globals import dp
+# from aiogram import executor as ex
+# from commands import start
+from globals import dp, bot
+import asyncio
 
-
-async def bot_callback(x):
-    print("Started")
-
+# async def bot_callback(x):
+#     print("Started")
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-    ex.start_polling(dp, on_startup=bot_callback, skip_updates=True)
+    asyncio.run(dp.start_polling(bot, allowed_updates=["message"]))

@@ -1,15 +1,8 @@
-import aiogram
-from aiogram import Bot, Dispatcher
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.filters.state import State, StatesGroup
-from aiogram.types import CallbackQuery, Message
-from aiogram.utils import executor
-from aiogram.utils.markdown import hbold
 from aiogram import types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from states.login import Guid
-from globals import bot, dp, User
+from globals import dp, User
 
 
 def user_auth(user_id):
