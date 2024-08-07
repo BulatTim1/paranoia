@@ -156,6 +156,9 @@ class TaskOrm(Base):
     description = sa.Column(sa.String)
     is_active = sa.Column(sa.Boolean, default=True)
     is_fake = sa.Column(sa.Boolean, default=False)
+    
+    def to_model(self):
+        return TaskModel(id=self.id, title=self.title, description=self.description)
 
 class TaskModel(BaseModel):
     model_config = ConfigDict(from_attributes=True)
@@ -163,8 +166,6 @@ class TaskModel(BaseModel):
     id: int
     title: str
     description: str
-    is_active: bool
-    is_fake: bool
 
 class LizardOrm(Base):
     __tablename__ = 'lizard'
