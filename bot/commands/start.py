@@ -35,5 +35,5 @@ async def add_category(message: Message, state: FSMContext):
     elif user_auth(user_id):
         await message.reply("Ты уже авторизован :3", reply_markup=keyboard)
     else:
-        user = User.add_user(user_id, message.text.strip())
+        user = User.add_user(user_id, message.text.strip()) # TODO: delete this after presentation
         await message.reply("Добро пожаловать в игру!", reply_markup=keyboard)
