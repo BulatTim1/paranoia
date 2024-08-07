@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, Navigation, Cell, Badge, Avatar, Info, Section, List } from "@telegram-apps/telegram-ui";
 import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import { Button, Navigation, Cell, Badge, Avatar, Info, Section, List, Image } from "@telegram-apps/telegram-ui";
 
