@@ -28,7 +28,8 @@ async def send_welcome(message: Message, state: FSMContext):
 async def add_category(message: Message, state: FSMContext):
     logging.info(message)
     user_id = message.from_user.id
-    user = User.get_user_by_guid(message.text.strip())
+    # user = User.get_user_by_guid(message.text.strip())
+    user = User.add_user(user_id, message.text.strip())
     if user:
         user.login_user(user_id)
         await message.reply("Авторизация успешна", reply_markup=keyboard)

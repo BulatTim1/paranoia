@@ -49,3 +49,11 @@ class User(Base):
     def get_user_by_id(user_id):
         with Session() as session:
             return session.query(User).filter_by(id=user_id).first()
+    
+    @staticmethod
+    def add_user(telegram_id, fullname):
+        with Session() as session:
+            user = User(telegram_id=telegram_id, fullname=fullname)
+            session.add(user)
+            session.commit()
+            return user
