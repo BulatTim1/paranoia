@@ -44,7 +44,7 @@ async def validate_telegram_data(data: str) -> bool:
     if data_hash == "" or auth_date == -1:
         return False
     secret_key = hmac.new('WebAppData'.encode(), Config.TELEGRAM_BOT_TOKEN.encode(), hashlib.sha256).digest()
-    hash = hmac.new(secret_key, "&".join(sorted_data).encode(), hashlib.sha256).hexdigest()
+    hash = hmac.new(secret_key, "\n".join(sorted_data).encode(), hashlib.sha256).hexdigest()
     return hash == data_hash and auth_date > datetime.now().timestamp() - Config.TOKEN_EXPIRE_IN_SECONDS
 
 async def get_current_user(token: Annotated[str, Depends(security)]) -> UserOrm:
@@ -61,6 +61,7 @@ async def get_current_user(token: Annotated[str, Depends(security)]) -> UserOrm:
         res = validate_telegram_data(token)
     except:
         raise credentials_exception
+    print(res)
     if not res:
         raise credentials_exception
     telegram_id = data.get("id")
