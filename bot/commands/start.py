@@ -16,7 +16,7 @@ form_router = Router()
 async def send_welcome(message: Message, state: FSMContext):
     logging.info(message)
     if user_auth(message.from_user.id):
-        ikb = InlineKeyboardButton(web_app=WebAppInfo('https://paranoia.bulattim.ru/'))
+        ikb = InlineKeyboardButton(text="Меню", web_app=WebAppInfo('https://paranoia.bulattim.ru/'))
 
         keyboard = InlineKeyboardMarkup()
         keyboard.add(ikb)
@@ -37,7 +37,7 @@ async def add_category(message: Message, state: FSMContext):
         res = user.init_user(user_id)
         if res:
             await message.reply("Авторизация успешна")
-            ikb = InlineKeyboardButton("Перейти", web_app=WebAppInfo(url='https://paranoia.bulattim.ru/'))
+            ikb = InlineKeyboardButton(text="Меню", web_app=WebAppInfo(url='https://paranoia.bulattim.ru/'))
             keyboard = InlineKeyboardMarkup()
             keyboard.add(ikb)
     await message.reply("Неверный токен")
