@@ -28,7 +28,7 @@ async def send_welcome(message: Message):
         await message.reply("Введите токен!")
         await state.update_data(guid=Guid.guid)
 
-@form_router.message(state=Guid.guid)
+@form_router.message(Guid.guid)
 async def add_category(message: Message):
     logging.info(message)
     user_id = message.from_user.id
