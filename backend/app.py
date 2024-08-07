@@ -141,13 +141,17 @@ async def guess(
     model: GuessPostModel,
     current_round: Annotated[RoundOrm, Depends(get_current_round)],
     current_user: Annotated[UserOrm, Depends(get_current_user)],
+    current_lizard: Annotated[Optional[LizardOrm], Depends(maybe_get_current_lizard)],
 ) -> bool:
     """Make a guess."""
-    with Session() as session:
-        if model.guess == current_round.winner:
-            current_user.points += 1
-            session.commit()
-            return True
+    if current_lizard is not None:
+        raise HTTPException(status_code=400, detail="Lizards can't guess")
+    guessed_user = UserOrm.get_user_by_id(model.guessed_user_id)
+    guessed_lizard = maybe_get_current_lizard(guessed_user, current_round)
+    if guessed_lizard is not None:
+        current_user.points += 1
+        return True
+    else:
         return False
 
 
