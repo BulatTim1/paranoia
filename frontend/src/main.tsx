@@ -10,9 +10,10 @@ import '@telegram-apps/telegram-ui/dist/styles.css';
 import {Home} from "./pages/home.tsx";
 import {Players} from "./pages/playertypes.tsx"
 import {Rules} from "./components/Rules";
+import {LizardTasks} from "./components/LizardTasks";
 
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
     {
         path: "/",
         element: <Home />
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     {
         path: "rules",
         element: <Rules />,
+    },
+    {
+        path: "lizard-tasks",
+        element: <LizardTasks />,
     }
 ]);
 
