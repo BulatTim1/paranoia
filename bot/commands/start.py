@@ -38,6 +38,5 @@ async def add_category(message: Message, state: FSMContext):
             await message.reply("Авторизация успешна")
             wa = WebAppInfo(url='https://paranoia.bulattim.ru/')
             ikb = InlineKeyboardButton(text="Меню", web_app=wa)
-            keyboard = InlineKeyboardMarkup()
-            keyboard.add(ikb)
+            keyboard = InlineKeyboardMarkup(inline_keyboard=[[ikb]])
     await message.reply("Неверный токен")
