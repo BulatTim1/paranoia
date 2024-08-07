@@ -1,10 +1,10 @@
 import React from "react";
-import {Button, Navigation, Cell, Badge, Avatar, Info, Section, List, Card} from "@telegram-apps/telegram-ui";
+import { Button, Navigation, Cell, Badge, Avatar, Info, Section, List, Card } from "@telegram-apps/telegram-ui";
 
 import "./index.css"
-import {useNavigate} from "react-router-dom";
-import {instruction, game_menu} from "../../menu_routes.ts";
-import {CardCell} from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
+import { useNavigate } from "react-router-dom";
+import { instruction, game_menu } from "../../menu_routes.ts";
+import { CardCell } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell";
 import { CardChip } from "@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip";
 
 
@@ -22,8 +22,8 @@ export const PlayerTypes = () => {
                                 #1
                             </CardChip>
                             <img
-                                alt="Dog"
-                                src="https://i.imgur.com/892vhef.jpeg"
+                                alt="РУСЫ"
+                                src="/russ.jpg"
                                 style={{
                                     display: 'block',
                                     height: 308,
@@ -47,8 +47,8 @@ export const PlayerTypes = () => {
                                 #2
                             </CardChip>
                             <img
-                                alt="Dog"
-                                src="https://i.imgur.com/892vhef.jpeg"
+                                alt="ЯЩЕР"
+                                src="/lizz.jpg"
                                 style={{
                                     display: 'block',
                                     height: 308,
