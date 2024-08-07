@@ -37,7 +37,7 @@ const AdaptiveVideoBox = ({ videoSrc }) => {
 
     return (
         <div id="video-container" style={containerStyles}>
-            <video src={videoSrc} style={videoStyles} pla />
+            <video src={videoSrc} style={videoStyles} controls />
         </div>
     );
 };
