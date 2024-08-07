@@ -4,7 +4,8 @@ import logging
 import sys
 
 from aiogram import Bot
-from globals import dp, Config
+
+from globals import dp, Config, bot
 from aiogram.client.session.middlewares.request_logging import RequestLogging
 from aiogram.methods import GetUpdates
 import asyncio

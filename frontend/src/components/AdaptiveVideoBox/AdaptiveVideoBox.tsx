@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import './AdaptiveVideoBox.css';
 
-interface AdaptiveVideoBoxProps {
-    videoSrc: string;
-}
-
-const AdaptiveVideoBox: React.FC<AdaptiveVideoBoxProps> = ({ videoSrc }) => {
-    const [width, setWidth] = useState(0);
-    const [height, setHeight] = useState(0);
+// @ts-ignore
+const AdaptiveVideoBox = ({videoSrc}) => {
+    const [setWidth] = React.useState(0);
+    const [setHeight] = React.useState(0);
 
     const handleResize = () => {
         const videoContainer = document.getElementById('video-container');
+        // @ts-ignore
         const videoWidth = videoContainer.offsetWidth;
         const videoHeight = videoWidth; // set height to match width for 1:1 aspect ratio
 
+        // @ts-ignore
         setWidth(videoWidth);
+        // @ts-ignore
         setHeight(videoHeight);
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
         handleResize();
         window.addEventListener('resize', handleResize);
 
@@ -40,8 +41,10 @@ const AdaptiveVideoBox: React.FC<AdaptiveVideoBoxProps> = ({ videoSrc }) => {
     };
 
     return (
+        // @ts-ignore
         <div id="video-container" style={containerStyles}>
-            <video src={videoSrc} style={videoStyles} />
+            {/* @ts-ignore */}
+            <video src={videoSrc} style={videoStyles} controls/>
         </div>
     );
 };
