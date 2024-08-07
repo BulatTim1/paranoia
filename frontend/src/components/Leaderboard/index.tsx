@@ -4,12 +4,9 @@ import { Cell, Image, List, Section } from "@telegram-apps/telegram-ui";
 export const Leaderboard = () => {
 
     return (
-        <List
-            style={{
-                background: 'var(--tgui--secondary_bg_color)',
+        <List>
+            <a href="/" className="BackButton">Назад</a>
 
-            }}
-        >
             <Section
                 header="Результаты"
             >
