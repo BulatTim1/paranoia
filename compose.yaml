@@ -10,6 +10,11 @@ services:
     env_file: .env
     depends_on:
       - db
+  backend:
+    build: ./backend
+    env_file: .env
+    depends_on:
+      - db
 
 
 volumes:

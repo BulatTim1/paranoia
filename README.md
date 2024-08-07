@@ -3,7 +3,8 @@ Paranoia game for LetoCTF Hackathon
 
 # services
  - bot - telegram bot for push notifications
- - web - telegram web app for players and admins
+ - backend - telegram web app for players and admins
+ - frontend - telegram web app for players and admins
  - db - postgres
 
 # how to start

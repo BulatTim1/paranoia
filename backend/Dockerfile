@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY ./ ./
 
-CMD ["python3", "run.py"]
+CMD ["fastapi", "run", "--host", "0.0.0.0", "--port", "8000"]
