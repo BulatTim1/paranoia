@@ -1,5 +1,5 @@
-import {Cell, Section, List} from "@telegram-apps/telegram-ui";
-
+import { Cell, Section, List } from "@telegram-apps/telegram-ui";
+import AdaptiveVideoBox from "../AdaptiveVideoBox/AdaptiveVideoBox";
 import "./index.css"
 import {
     SectionFooter
@@ -14,7 +14,7 @@ export const Rules = () => {
             <a href="/" className="BackButton">Назад</a>
             <List>
                 <Section>
-                    <iframe src="https://www.youtube.com/embed/WFC4wxaZ5Qc"></iframe>
+                    <AdaptiveVideoBox videoSrc="/rules.mp4" />
                 </Section>
 
                 <Cell
